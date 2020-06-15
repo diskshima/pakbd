@@ -7,7 +7,6 @@ extern keymap_config_t keymap_config;
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
-  RAISE,
 };
 
 #define MS_UP KC_MS_UP
@@ -25,7 +24,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,             KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_LBRC, KC_RBRC, KC_BSPC,
     KC_LCTL, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,             KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT, KC_ENT ,
     KC_LSFT, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,             KC_B   , KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_RSFT,
-             KC_LALT, KC_LCMD,    KC_SPC,                               KC_SPC,   RAISE  ,       KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT
+             KC_LALT, KC_LCMD,    KC_SPC,                               KC_SPC,   TG(_RAISE),       KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT
       ),
   [_RAISE] = LAYOUT(
     _______, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5   , _______,   KC_F6  , KC_F7  , KC_F8  , KC_9   , KC_F10 , KC_F11  , KC_F12 , _______, _______,
@@ -44,21 +43,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case QWERTY:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_QWERTY);
-      }
-      return false;
-      break;
-    case RAISE:
-      if (record->event.pressed) {
-        raise_pressed = true;
-        layer_on(_RAISE);
-      }
-      else {
-        layer_off(_RAISE);
-        if (raise_pressed) {
-          register_code(KC_RCMD);
-          unregister_code(KC_RCMD);
-        }
-        raise_pressed = false;
       }
       return false;
       break;

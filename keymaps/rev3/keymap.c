@@ -5,10 +5,6 @@ extern keymap_config_t keymap_config;
 #define _QWERTY 0
 #define _RAISE 1
 
-enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
-};
-
 #define MS_UP KC_MS_UP
 #define MS_DOWN KC_MS_DOWN
 #define MS_LEFT KC_MS_LEFT
@@ -34,24 +30,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              _______, _______,    KC_MS_BTN1,                           KC_MS_BTN2, _______,      _______, _______, _______, _______
   )
 };
-
-static bool raise_pressed = false;
-static bool lower_pressed = false;
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case QWERTY:
-      if (record->event.pressed) {
-        set_single_persistent_default_layer(_QWERTY);
-      }
-      return false;
-      break;
-    default:
-      if (record->event.pressed) {
-        raise_pressed = false;
-        lower_pressed = false;
-      }
-      break;
-  }
-  return true;
-}

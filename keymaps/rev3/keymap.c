@@ -12,6 +12,15 @@ enum custom_keycodes {
   LOWER,
 };
 
+#define MS_UP KC_MS_UP
+#define MS_DOWN KC_MS_DOWN
+#define MS_LEFT KC_MS_LEFT
+#define MS_RIGHT KC_MS_RIGHT
+#define WH_UP KC_MS_WH_UP
+#define WH_DOWN KC_MS_WH_DOWN
+#define WH_LEFT KC_MS_WH_LEFT
+#define WH_RIGHT KC_MS_WH_RIGHT
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT(
     KC_ESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , KC_GRAVE,   KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_MINS, KC_EQL , KC_BSLS, KC_DEL,
@@ -21,11 +30,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_LALT, KC_LCMD,    KC_SPC,                               KC_SPC,   RAISE  ,       KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT
       ),
   [_RAISE] = LAYOUT(
-    _______, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , _______,   KC_F6  , KC_F7  , KC_F8  , KC_9   , KC_F10 , KC_F11  , KC_F12 , _______, _______,
-    _______, _______, _______, _______, _______, _______,            _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______,            KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, _______, _______, LCMD(KC_ENT),
-    _______, _______, _______, _______, _______, _______,            _______, _______, _______, _______, _______, _______, _______,
-             _______, _______,    _______,                             _______,   _______,      _______, _______, _______, _______
+    _______, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5   , _______,   KC_F6  , KC_F7  , KC_F8  , KC_9   , KC_F10 , KC_F11  , KC_F12 , _______, _______,
+    _______, _______, WH_LEFT, WH_UP  , WH_DOWN, WH_RIGHT,            _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, MS_LEFT, MS_UP  , MS_DOWN, MS_RIGHT,            KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, _______, _______,  _______,
+    _______, _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
+             _______, _______,    KC_MS_BTN1,                           KC_MS_BTN2, _______,      _______, _______, _______, _______
   ),
   [_LOWER] = LAYOUT(
     _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______,

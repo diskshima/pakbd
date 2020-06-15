@@ -4,12 +4,10 @@ extern keymap_config_t keymap_config;
 
 #define _QWERTY 0
 #define _RAISE 1
-#define _LOWER 2
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   RAISE,
-  LOWER,
 };
 
 #define MS_UP KC_MS_UP
@@ -35,13 +33,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, MS_LEFT, MS_UP  , MS_DOWN, MS_RIGHT,            KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, _______, _______,  _______,
     _______, _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______, _______, _______,
              _______, _______,    KC_MS_BTN1,                           KC_MS_BTN2, _______,      _______, _______, _______, _______
-  ),
-  [_LOWER] = LAYOUT(
-    _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______,            _______, _______, _______, _______, _______, _______, LCTL(KC_MINS), _______,
-    _______, _______, _______, _______, _______, _______,            _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______,            KC_F12 , _______, _______, _______, _______, _______, _______,
-             _______, _______,    _______,                             _______,   _______,      _______, _______, _______, _______
   )
 };
 
@@ -71,21 +62,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case LOWER:
-      if (record->event.pressed) {
-        lower_pressed= true;
-        layer_on(_LOWER);
-      }
-      else {
-        layer_off(_LOWER);
-        if (lower_pressed) {
-          register_code(KC_SPC);
-          unregister_code(KC_SPC);
-        }
-        lower_pressed = false;
-      }
-      return false;
-      break;
     default:
       if (record->event.pressed) {
         raise_pressed = false;
@@ -95,4 +71,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
-
